@@ -101,7 +101,7 @@ LIB_SRC := lodepng.cpp lodepng-turbo.cpp
 DEPNG_SRC := simdtests/depng/depng_ref.cpp simdtests/depng/depng_sse2.cpp
 
 #LIB_LIBDEFLATE := -L./libdeflate -llibdeflatestatic
-LIB_LIBDEFLATE := ./libdeflate/libdeflatestatic.lib
+LIB_LIBDEFLATE := ./libdeflate/libdeflate.a
 
 STATIC_LIB_OBJ := $(LIB_SRC:.cpp=.o) 
 SHARED_LIB_OBJ := $(LIB_SRC:.cpp=.shlib.o)
