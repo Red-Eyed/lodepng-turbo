@@ -1,1 +1,0 @@
-/usr/bin/clang++ -fPIC   -shared -Wl,-soname,lodepng.cpython-37m-x86_64-linux-gnu.so -o lodepng.cpython-37m-x86_64-linux-gnu.so CMakeFiles/lodepng.dir/lodepng-turbo.cpp.o   -L/home/redeyed/Projects/lodepng-turbo/pybind/..  -Wl,-rpath,/home/redeyed/Projects/lodepng-turbo/pybind/.. -flto -llodepngturbo 
