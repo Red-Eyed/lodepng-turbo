@@ -88,9 +88,9 @@ DEFAULT_TARGETS :=
 STATIC_LIB := liblodepngturbo$(STATIC_LIB_SUFFIX)
 SHARED_LIB := liblodepngturbo$(SHARED_LIB_SUFFIX)
 
-LIB_CXXFLAGS += $(CXXFLAGS) -fvisibility=hidden -D_ANSI_SOURCE
+LIB_CXXFLAGS += $(CXXFLAGS) -fvisibility=default -D_ANSI_SOURCE
 LIB_CXXFLAGS += -DLODEPNG_TURBO_COMPILE
-LIB_CXXFLAGS += -DLODEPNG_NO_COMPILE_CPP
+# LIB_CXXFLAGS += -DLODEPNG_NO_COMPILE_CPP
 LIB_CXXFLAGS += -DLODEPNG_NO_COMPILE_CRC
 LIB_CXXFLAGS += -DLODEPNG_NO_COMPILE_ZLIB
 
@@ -103,10 +103,10 @@ DEPNG_SRC := simdtests/depng/depng_ref.cpp simdtests/depng/depng_sse2.cpp
 #LIB_LIBDEFLATE := -L./libdeflate -llibdeflatestatic
 LIB_LIBDEFLATE := ./libdeflate/libdeflate.a
 
-STATIC_LIB_OBJ := $(LIB_SRC:.cpp=.o) 
+STATIC_LIB_OBJ := $(LIB_SRC:.cpp=.o)
 SHARED_LIB_OBJ := $(LIB_SRC:.cpp=.shlib.o)
 
-STATIC_DEPNG_OBJ := $(DEPNG_SRC:.cpp=.o) 
+STATIC_DEPNG_OBJ := $(DEPNG_SRC:.cpp=.o)
 SHARED_DEPNG_OBJ := $(DEPNG_SRC:.cpp=.shlib.o)
 
 # Compile static library object files
@@ -127,7 +127,7 @@ $(SHARED_DEPNG_OBJ): simdtests/depng/%.shlib.o: simdtests/depng/%.cpp $(LIB_HEAD
 		$(SHARED_LIB_CXXFLAGS) $<
 
 # Create static library
-$(STATIC_LIB):$(STATIC_LIB_OBJ) $(STATIC_DEPNG_OBJ) 
+$(STATIC_LIB):$(STATIC_LIB_OBJ) $(STATIC_DEPNG_OBJ)
 	$(QUIET_AR) $(AR) cr $@ $+
 
 $(LIB_LIBDEFLATE):
@@ -136,7 +136,7 @@ $(LIB_LIBDEFLATE):
 DEFAULT_TARGETS += $(STATIC_LIB)
 
 # Create shared library
-$(SHARED_LIB):$(SHARED_LIB_OBJ) $(LIB_LIBDEFLATE) $(SHARED_DEPNG_OBJ) 
+$(SHARED_LIB):$(SHARED_LIB_OBJ) $(LIB_LIBDEFLATE) $(SHARED_DEPNG_OBJ)
 	$(QUIET_CCLD) $(CXX) -o $@ $(LDFLAGS) $(LIB_CXXFLAGS) \
 		$(SHARED_LIB_LDFLAGS) -shared $+
 
@@ -184,7 +184,7 @@ endif
 PROG_CXXFLAGS := $(LIB_CXXFLAGS)
 PROG_COMMON_SRC      := lodepng_util.cpp
 NONTEST_PROG_SRC     := pngdetail.cpp
-TEST_PROG_COMMON_SRC := 
+TEST_PROG_COMMON_SRC :=
 TEST_PROG_SRC        := lodepng_unittest.cpp
 
 NONTEST_PROGRAMS := $(NONTEST_PROG_SRC:%.cpp=%$(PROG_SUFFIX))
